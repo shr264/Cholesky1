@@ -19,7 +19,7 @@ choleskyalgo1.c:70:19: warning: unused variable 'tr' [-Wunused-variable]
 choleskyalgo1.c:84:19: warning: unused variable 'tr' [-Wunused-variable]
     char no= 'N', tr= 'T';
                   ^
-choleskyalgo1.c:289:16: warning: unused variable 'temp' [-Wunused-variable]
+choleskyalgo1.c:291:16: warning: unused variable 'temp' [-Wunused-variable]
         double temp;
                ^
 choleskyalgo1.c:141:10: warning: unused variable 'invS' [-Wunused-variable]

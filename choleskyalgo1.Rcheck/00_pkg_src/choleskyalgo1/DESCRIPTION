@@ -7,6 +7,6 @@ Authors@R: person("First", "Last", email = "first.last@example.com", role = c("a
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
 LazyData: TRUE
-Packaged: 2016-02-10 19:33:09 UTC; syedrahman
+Packaged: 2016-02-11 14:04:49 UTC; syedrahman
 Author: First Last [aut, cre]
 Maintainer: First Last <first.last@example.com>

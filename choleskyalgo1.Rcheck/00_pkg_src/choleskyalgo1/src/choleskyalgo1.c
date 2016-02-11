@@ -84,7 +84,7 @@ void matmatprod(double* v, double* A, double* u, int N){
     char no= 'N', tr= 'T';
     int m= N, n= N, k= N, lda= N, ldb= N, ldc= N;
     double* tmp;
-    tmp = (double *)malloc(N*sizeof(double));
+    tmp = (double *)malloc(N*N*sizeof(double));
     initvec(tmp, N*N);
     dgemm_(&no,&no,&m,&n,&k,&alpha,A,&lda,v,&ldb,&beta,tmp,&ldc);
     for(int i= 0; i<N*N; ++i){
@@ -189,7 +189,7 @@ void choleskyalgo1 (int *nIn, int *pIn, double *data, double *SS, double *thresh
   }
     
     //this is the sorting portion
- 
+
     
     for(int i = 0; i < p; i++){
         Rprintf("\n Beginning Sorting at %d",i);
@@ -197,7 +197,7 @@ void choleskyalgo1 (int *nIn, int *pIn, double *data, double *SS, double *thresh
         zeros = (double *)malloc((p-i)*sizeof(double));
         
         memset(zeros, 0, sizeof(double) * (p-i));
-        
+
         
     for(int c=i; c<p ;c++){
             int zerosum = 0;
@@ -256,7 +256,7 @@ void choleskyalgo1 (int *nIn, int *pIn, double *data, double *SS, double *thresh
         free(zeros);
     }
     
-    
+
     //filling the graph
     Rprintf("\n Filling graph");
     for(int c = (p-1); c >= 0 ; c--){
@@ -276,13 +276,15 @@ void choleskyalgo1 (int *nIn, int *pIn, double *data, double *SS, double *thresh
         }
     }
     
+
+    
     //choilesky calclulation
     
     
     L[(p-1)*p+(p-1)] = 1;
     D[(p-1)*p+(p-1)] = sqrt(1/S[p-1][p-1]);
     
-    for (int i1 = 0; i1< (p-1); i1++){
+    for (int i1 = 0; i1 < (p-1); i1++){
         Rprintf("\n Cholesky at i = %d",i1);
         int i = i1;
         double Sii = S[i][i];
@@ -376,12 +378,14 @@ void choleskyalgo1 (int *nIn, int *pIn, double *data, double *SS, double *thresh
         }
     }
     //end cholesky
+
+ 
     
     //multiply L by D
     
     Rprintf("\n Multiply L by D");
     matmatprod(D,L,LD,p);
-    
+/*
     
     //this is algorithm 1 from the paper
     
@@ -400,7 +404,9 @@ void choleskyalgo1 (int *nIn, int *pIn, double *data, double *SS, double *thresh
     }
     
     // end algorothim 1
-        
+
+
+    
     //swap back to original order
     
      Rprintf("\n Swapping back to original order");
@@ -421,5 +427,8 @@ void choleskyalgo1 (int *nIn, int *pIn, double *data, double *SS, double *thresh
     }
     // multiply (LD)t(LD) = S
     mattransmatprod(LD,LD,SS,p);
-    
+   
+ 
+ */
+ 
     }
