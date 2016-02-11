@@ -1,0 +1,6 @@
+choleskyalgo1 <- function(Y, threshold) {
+    n = dim(Y)[1]
+    p = dim(Y)[2]
+    data = as.double(Y)
+    .C("choleskyalgo1", as.interger(n), as.interger(p), data, as.double(threshold), as.double(diag(p)), as.double(diag(p)))
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "#' @useDynLib mypackage add_\nadd <- function(x, y) .Call(add_, x, y)\n",
+    "created" : 1447814058063.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1876192803",
+    "id" : "E3A4AA69",
+    "lastKnownWriteTime" : 1447814088,
+    "path" : "~/Documents/Fall2015/Cholesky/basicadd2/R/basicadd.R",
+    "project_path" : "R/basicadd.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "Package: basicadd2\nType: Package\nTitle: What the Package Does (Title Case)\nVersion: 0.1\nDate: 2015-11-17\nAuthors@R: person(\"First\", \"Last\", email = \"first.last@example.com\", role = c(\"aut\", \"cre\"))\nDescription: More about what it does (maybe more than one line)\nLicense: What license is it under?\nLazyData: TRUE",
+    "created" : 1447814122135.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3022661543",
+    "id" : "617B1E45",
+    "lastKnownWriteTime" : 1447807453,
+    "path" : "~/Documents/Fall2015/Cholesky/basicadd2/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "dcf"
+}

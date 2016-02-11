@@ -1,0 +1,13 @@
+Package: choleskyalgo1
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1
+Date: 2015-11-17
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+LazyData: TRUE
+Packaged: 2016-02-10 19:33:09 UTC; syedrahman
+Author: First Last [aut, cre]
+Maintainer: First Last <first.last@example.com>
+Built: R 3.1.2; x86_64-apple-darwin13.4.0; 2016-02-10 19:33:14 UTC; unix

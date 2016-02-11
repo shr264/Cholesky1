@@ -1,0 +1,17 @@
+{
+    "contents" : "#include <R.h>\n#include <Rinternals.h>\n\nSEXP add_(SEXP x_, SEXP y_) {\n  double x = asReal(x_);\n  double y = asReal(y_);\n  \n  double sum = x + y;\n  \n  return ScalarReal(sum);\n}",
+    "created" : 1447814358084.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "406111508",
+    "id" : "87967C5B",
+    "lastKnownWriteTime" : 1447807453,
+    "path" : "~/Documents/Fall2015/Cholesky/basicadd2/src/basicadd.c",
+    "project_path" : "src/basicadd.c",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "c"
+}

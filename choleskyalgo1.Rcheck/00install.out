@@ -1,0 +1,41 @@
+* installing *source* package ‘choleskyalgo1’ ...
+** libs
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I/usr/local/include -I/usr/local/include/freetype2 -I/opt/X11/include    -fPIC  -Wall -mtune=core2 -g -O2  -c choleskyalgo1.c -o choleskyalgo1.o
+choleskyalgo1.c:27:5: warning: implicit declaration of function 'dgetrf_' is invalid in C99 [-Wimplicit-function-declaration]
+    dgetrf_(&N,&N,A,&N,IPIV,&INFO);
+    ^
+choleskyalgo1.c:28:5: warning: implicit declaration of function 'dgetri_' is invalid in C99 [-Wimplicit-function-declaration]
+    dgetri_(&N,A,&N,IPIV,WORK,&LWORK,&INFO);
+    ^
+choleskyalgo1.c:42:19: warning: unused variable 'tr' [-Wunused-variable]
+    char no= 'N', tr= 'T';
+                  ^
+choleskyalgo1.c:56:10: warning: unused variable 'no' [-Wunused-variable]
+    char no= 'N', tr= 'T';
+         ^
+choleskyalgo1.c:70:19: warning: unused variable 'tr' [-Wunused-variable]
+    char no= 'N', tr= 'T';
+                  ^
+choleskyalgo1.c:84:19: warning: unused variable 'tr' [-Wunused-variable]
+    char no= 'N', tr= 'T';
+                  ^
+choleskyalgo1.c:289:16: warning: unused variable 'temp' [-Wunused-variable]
+        double temp;
+               ^
+choleskyalgo1.c:141:10: warning: unused variable 'invS' [-Wunused-variable]
+  double invS[p*p];
+         ^
+choleskyalgo1.c:142:10: warning: unused variable 'inverseS' [-Wunused-variable]
+  double inverseS[p][p];
+         ^
+9 warnings generated.
+clang -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o choleskyalgo1.so choleskyalgo1.o -L/Library/Frameworks/R.framework/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Resources/lib -lRblas -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+installing to /Users/syedrahman/Documents/Spring2016/CholeskyPaper1/Cholesky1/choleskyalgo1.Rcheck/choleskyalgo1/libs
+** R
+** preparing package for lazy loading
+** help
+No man pages found in package  ‘choleskyalgo1’ 
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (choleskyalgo1)

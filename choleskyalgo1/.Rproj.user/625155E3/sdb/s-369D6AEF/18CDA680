@@ -1,0 +1,17 @@
+{
+    "contents" : "exportPattern(\"^[[:alpha:]]+\")\nuseDynLib(mypackage, add_)\n",
+    "created" : 1447814117724.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3307309432",
+    "id" : "18CDA680",
+    "lastKnownWriteTime" : 1447814152,
+    "path" : "~/Documents/Fall2015/Cholesky/basicadd2/NAMESPACE",
+    "project_path" : "NAMESPACE",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_namespace"
+}

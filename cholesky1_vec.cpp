@@ -66,28 +66,28 @@ void initvec(double* v, int N){
 void matvecprod(double* A, double* v, double* u, int N){
     double alpha= 1.0, beta= 0.0;
     char no= 'N', tr= 'T';
-    int m= N, n= N, lda= N, incx= 1, incy= 1;
+    int m= N, n= N, lda= N, incx= N, incy= N;
     double* tmp= new double[N];
     initvec(tmp, N);
     dgemv_(&no,&m,&n,&alpha,A,&lda,v,&incx,&beta,tmp,&incy);
     for(int i= 0; i<N; ++i){
         u[i]= tmp[i];
-    }
+        }
     delete [] tmp;
-}
+    }
 
-void transmatvecprod(double* A, double* v, double* u, int N){
+void transmatvecprod(double* A, double* v, double* u, int N){ 
     double alpha= 1.0, beta= 0.0;
     char no= 'N', tr= 'T';
-    int m= N, n= N, lda= N, incx= 1, incy= 1;
+    int m= N, n= N, lda= N, incx= N, incy= N;
     double* tmp= new double[N];
     initvec(tmp, N);
     dgemv_(&tr,&m,&n,&alpha,A,&lda,v,&incx,&beta,tmp,&incy);
     for(int i= 0; i<N; ++i){
         u[i]= tmp[i];
-    }
+        }
     delete [] tmp;
-}
+    }
 
 void vecmatprod(double* v, double* A, double* u, int N){
     double alpha= 1.0, beta= 0.0;
@@ -128,7 +128,6 @@ void mattransmatprod(double* v, double* A, double* u, int N){
     delete [] tmp;
 }
 
-
 int getIndexOfLargestElement(double arr[], int size) {
     int largestIndex = 0;
     for (int index = largestIndex; index < size; index++) {
@@ -152,7 +151,7 @@ int getIndexOfSmallestElement(double arr[], int size) {
 int main() {
   int p = 4;
   int n = 5;
-  double Ssum = 0;
+  double sum = 0;
   double S[p][p];
   double Y[n*p];
   double data[n][p];
@@ -216,10 +215,10 @@ int main() {
   for(int i = 0; i<n; i++){
     for(int j = 0; j<p; j++){
       for (int k = 0; k < n; k++){
-	Ssum = Ssum + data[k][i]*data[k][j];
+	sum = sum + data[k][i]*data[k][j];
       }
-      S[i][j] = Ssum/n;
-      Ssum = 0;
+      S[i][j] = sum/n;
+      sum = 0;
     }
   }
       printf("The sample covariance matrix:-\n");
@@ -308,7 +307,7 @@ int main() {
     
     for(int i = 0; i < p; i++){
         double *zeros;
-        zeros = (double *)malloc((p-i)*sizeof(double));
+        zeros = new double[p-i];
         
         memset(zeros, 0, sizeof(double) * (p-i));
         
@@ -394,7 +393,7 @@ int main() {
                 
             }
         }
-        free(zeros);
+        delete zeros;
     }
     
     double break1;
@@ -451,145 +450,110 @@ int main() {
     D[p-1][p-1] = 1/S[p-1][p-1];
     
     for (int i1 = 0; i1< (p-1); i1++){
-        int i = i1;
-        cout << "Cholesky Calcluation at i = " << i << endl;
-        double Sii = S[i][i];
-        double temp;
-        
-        int counter = 0;
-        
-        for (int c = (i+1); c < p; c++){
-            if(fadjMat[i][c]>0){
-                counter += 1;
-            }
-        }
-        
-        cout << "Non-zero entries in row " << (i+1) << "i is "<< counter << endl;
-        
-        if(counter==0){
-            cout << "Counter 0"<< endl;
-            double dii = pow(1/(Sii),0.5);
-            L[i][i] = 1;
-            D[i][i] = pow(dii,2);
-        }
-        else{
-            cout << "Counter non-zero" <<endl;
-            double *Sdoti;
-            Sdoti = (double *)malloc(counter*sizeof(double));
-            //Sdoti=new double[counter];
-            double *Sgp;
-            Sgp = (double *)malloc(counter*counter*sizeof(double));
-            //Sgp=new double[counter*counter];
-            double *u;
-            u = (double *)malloc(counter*sizeof(double));
-            //u=new double[counter];
-            
-            memset(u, 0, sizeof(double) * counter);
-            
-            for(int c = 0; c < counter ; c++){
-                cout << c << ": " << u[c] << endl;
-            }
-            
-            int count1 = 0;
-            cout << "count1 set to 0" <<endl;
-            for (int c = (i+1); c < p; c++){
-                cout << "c = " << c <<endl;
-                if(fadjMat[i][c]>0){
-                    Sdoti[count1] = S[i][c];
-                    
-                    int count2 = 0;
-                    
-                    for(int d = (i+1); d < p; d++){
-                        
-                        if(fadjMat[d][i]>0){
-                            
-                            Sgp[count2 + counter*count1]=S[d][c];
+      int i = i1;
+      cout << "Cholesky Calcluation at i = " << i << endl;
+      double Sii = S[i][i];
+      double temp;
 
-                            if(count2<counter){
-                                                                count2 += 1;}
-                        }
-                        
-                    }
-                   
-                    count1 += 1;
-                    
-                }
-                
-            }
-            
-            cout << "Printing Sgp" << endl;
-            
-            for (int c = 0; c < counter; c++)
-                for (int d = 0; d < counter; d++){
-                    cout  << (c+1) << "," << (d+1) << ":"<< Sgp[c*counter+d]  << endl;
-                }
-            
-            cout << "Printing Sdoti" << endl;
-            
-            for (int c = 0; c < counter; c++){
-                cout  << (c+1) << ":"<< Sdoti[c]  << endl;
-            }
-            
-            double break1;
-            
-            cout << "Please enter break: "<< endl;
-            cin >> break1;
-            
-            printf("Calculating & Printing inverse\n");
-            
-            inverse(Sgp,counter);
-            
-            for (int c = 0; c < counter; c++)
-                for (int d = 0; d < counter; d++){
-                    cout  << (c+1) << "," << (d+1) << ":"<< Sgp[c*counter+d]  << endl;
-                }
-            
-            printf("Calcuating and Printing matrix vec prod:-\n");
-            
-            matvecprod(Sgp,Sdoti,u,counter);
-            
-            
-            printf("u is:-\n");
-            for (int c = 0; c < counter; c++){
-                cout  << (c+1) << ":"<< u[c]  << endl;
-                
-            }
-            
-            double tempprod = 0;
-            
-            for(int c = 0; c < counter; c++){
-                tempprod = tempprod - u[c]*Sdoti[c];
-            }
-            
-            printf("Calcuating dii:-\n");
-            
-            double dii;
-            dii = sqrt(1/(Sii + tempprod));
-            
-            cout << "Temp Product is: " << tempprod << endl;
-            cout << "Sii: " << Sii << endl;
-            cout << "dii: " << dii << endl;
-            
-            
-            L[i][i] = 1;
-            int count3 = 0;
-            for(int c = (i+1); c < p ; c++){
-                if(fadjMat[i][c]>0){
-                    L[i][c] = -u[count3];
-                    cout << "L" << i <<","<< c  << "," << count3 << ":" << u[count3] << endl;
-                    count3 += 1;
-                }
-            }
-            D[i][i] = pow(dii,2);
-            cout << "D"<< i <<","<< i  << ":" << 	D[i][i] << endl;
-            
-            free(Sdoti);
-            free(Sgp);
-            free(u);
-            //delete Sdoti;
-            //delete Sgp;
-            //delete u;
-        }
+      int counter = 0;
+    
+      for (int c = (i+1); c < p; c++){
+	if(fadjMat[i][c]>0){counter += 1;}
+      }
+      
+      cout << "Non-zero entries in row " << (i+1) << "i s "<< counter << endl;
+    
+      if(counter==0){
+          cout << "Counter 0"<< endl;
+	double dii = pow(1/(Sii),0.5);
+	L[i][i] = 1;
+	D[i][i] = pow(dii,2);
+      }
+      else{
+          cout << "Counter non-zero" <<endl;
+	double *Sdoti;
+	Sdoti=new double[counter];
+	double *Sgp;
+	Sgp=new double[counter*counter];
+	double *u;
+	u=new double[counter];
+          
+	memset(u, 0, sizeof(double) * counter);
+
+	for (int c = (i+1); c < p; c++){
+	  int count1 = 0;
+	  if(adjMat[i][c]>0){
+	    Sdoti[count1] = S[i][c];
+	    cout << count1 << "," << Sdoti[count1] << ","<< S[i][c] << endl;
+	    int count2 = 0;
+	    for(int d = (i+1); d < p; d++){
+	      if(adjMat[c][d]>0){
+		Sgp[count1*counter+count2]=S[c][d];
+		cout << count1 << "," << count2 << "," << Sgp[count1*counter+count2] << endl;
+		count2 += 1;
+	      }
+        count1 += 1;
+	    }  
+	  }
+	}
+
+	cout << "Printing Sgp" << endl;
+	
+	for (int c = 0; c < counter; c++)
+	  for (int d = 0; d < counter; d++){
+	    cout  << (c+1) << "," << (d+1) << ":"<< Sgp[c*counter+d]  << endl;
+	  }
+
+	cout << "Printing Sdoti" << endl;
+	
+	for (int c = 0; c < counter; c++){
+	    cout  << (c+1) << ":"<< Sdoti[c]  << endl;
+	  }
+
+	double break1;
+
+	cout << "Please enter break: "<< endl;
+	cin >> break1;
+
+	printf("Calculating inverse\n");
+	
+	inverse(Sgp,counter);
+	
+	printf("Calcuating matrix vec prod:-\n");
+	
+	matvecprod(Sgp,Sdoti,u,counter);
+	
+	double tempprod;
+    
+	for(int c = 0; c < counter; c++){
+        tempprod = -u[c]*Sdoti[c];
+    }
+          
+	printf("Calcuating dii:-\n");
+	
+          double dii;
+          dii = sqrt(1/(Sii + tempprod));
+          
+          cout << "Temp Product is: " << tempprod << endl;
+          cout << "Sii: " << Sii << endl;
+          cout << "dii: " << dii << endl;
+
+	
+	L[i][i] = 1;
+	for(int c = (i+1); c < p ; c++){
+	  int count1 = 0;
+	  if(adjMat[i][c]>0){
+	    L[i][c] = -u[count1];
+	    cout << "L" << i <<","<< c  << ":" << u[count1] << endl;
+	    count1 += 1;
+	  }
+	}
+	D[i][i] = pow(dii,2);
+	cout << "D"<< i <<","<< i  << ":" << 	D[i][i] << endl;
+	delete Sdoti;
+	delete Sgp;
+	delete u;	
+      }
     }
     //end cholesky
     

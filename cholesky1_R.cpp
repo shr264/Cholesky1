@@ -4,7 +4,6 @@
  
  */
 
-#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include<string.h>
@@ -144,12 +143,12 @@ int getIndexOfSmallestElement(double arr[], int size) {
     for (int index = largestIndex; index < size; index++) {
         if (arr[largestIndex] > arr[index]) {
             largestIndex = index;
-        }
+         }
     }
     return largestIndex;
 }
 
-int main() {
+void choleskyalgo1 (int *n, int *p, double *data, double *threshold, double *L, double *D) {
   int p = 4;
   int n = 5;
   double Ssum = 0;
@@ -157,14 +156,11 @@ int main() {
   double Y[n*p];
   double data[n][p];
   double Correlation[p][p];
-  double threshold;
   double newS[p][p];
   double adjMat[p][p];
   double fadjMat[p][p];
   double invS[p*p];
   double inverseS[p][p];
-  double L[p][p];
-  double D[p][p];
     int medgeset[p][2];
     int medgesetlen = 0;
     int Sswaps[p][2];
@@ -180,6 +176,8 @@ int main() {
        cin >> data[c][d];
      }
   */
+    
+   /*
     data[0][0] = 1.492901;
     data[0][1] = 0.2290852;
     data[0][2] = -2.9856011;
@@ -200,13 +198,13 @@ int main() {
     data[4][1] = 2.6759905;
     data[4][2] = 1.5341220;
     data[4][3] = 0.186644492;
-    
+   */
 
-   printf("The data matrix:-\n");
+   //printf("The data matrix:-\n");
  
-    for (int c = 0; c < n; c++)
-      for (int d = 0; d < p; d++)
-	cout  << (c+1) << "," << (d+1) << ":"<<data[c][d]  << endl;
+    //for (int c = 0; c < n; c++)
+     // for (int d = 0; d < p; d++)
+	//cout  << (c+1) << "," << (d+1) << ":"<<data[c][d]  << endl;
 
 
    
@@ -216,18 +214,18 @@ int main() {
   for(int i = 0; i<n; i++){
     for(int j = 0; j<p; j++){
       for (int k = 0; k < n; k++){
-	Ssum = Ssum + data[k][i]*data[k][j];
+	Ssum = Ssum + data[k*p+i]*data[k*p+j];
       }
       S[i][j] = Ssum/n;
       Ssum = 0;
     }
   }
-      printf("The sample covariance matrix:-\n");
- 
+ //     printf("The sample covariance matrix:-\n");
+ /*
     for (int c = 0; c < p; c++)
       for (int d = 0; d < p; d++)
 	cout  << (c+1) << "," << (d+1) << ":"<<S[c][d]  << endl;
-
+*/
     // now we convert the covariance matrix to a correlation matrix
 
     for(int i = 0; i<p; i++){
@@ -236,17 +234,19 @@ int main() {
     }
   }
 
+ /*
    printf("The sample correlation matrix:-\n");
  
     for (int c = 0; c < p; c++)
       for (int d = 0; d < p; d++)
 	cout  << (c+1) << "," << (d+1) << ":"<< Correlation[c][d]  << endl;
-
+*/
     // now we calculate the new S
 
+ /*
     cout << "Please enter threshold: "<< endl;
     cin >> threshold;
-    
+ */
 
     for(int i = 0; i<p; i++){
       for(int j = 0; j<p; j++){
@@ -263,6 +263,7 @@ int main() {
     }
   }
 
+    /*
     fadjMat[0][0] = 1;
     fadjMat[0][1] = 1;
     fadjMat[0][2] = 0;
@@ -279,7 +280,7 @@ int main() {
     fadjMat[3][1] = 0;
     fadjMat[3][2] = 1;
     fadjMat[3][3] = 1;
-    
+    */
     
     
     printf("The new sample covariance matrix:-\n");
@@ -308,22 +309,24 @@ int main() {
     
     for(int i = 0; i < p; i++){
         double *zeros;
-        zeros = (double *)malloc((p-i)*sizeof(double));
+        zeros = new double[p-i];
         
         memset(zeros, 0, sizeof(double) * (p-i));
         
         printf("The zeros vector:-\n");
-        
+      
+        /*
         for (int c = i; c < p; c++){
             cout  << c << ":" << zeros[c]  << endl;
         }
+        */
         
         for(int c=i; c<p ;c++){
             int zerosum = 0;
             for(int d=i; d<p ;d++){
                 if(adjMat[c][d]==0){
                     zerosum += 1;
-                    cout << "zerosum at i = "<< i << " and " << c  << "," << d << "is: " << zerosum << endl;
+                //    cout << "zerosum at i = "<< i << " and " << c  << "," << d << "is: " << zerosum << endl;
                 }
             }
         zeros[c-i] = zerosum;
@@ -331,9 +334,11 @@ int main() {
         
         printf("The zeros vector:-\n");
         
+        /*
         for (int c = i; c < p; c++){
             cout  << c << ":"<< zeros[c]  << endl;
         }
+        */
         
         int max_pos = i;
         int min_pos = i;
@@ -394,20 +399,16 @@ int main() {
                 
             }
         }
-        free(zeros);
+        delete zeros;
     }
     
-    double break1;
-    
-    cout << "Please enter break: "<< endl;
-    cin >> break1;
-    
-    printf("The row-column swapped sample covariance matrix:-\n");
-    
+    /*
     for (int c = 0; c < p; c++)
         for (int d = 0; d < p; d++)
             cout  << (c+1) << "," << (d+1) << ":"<< S[c][d]  << endl;
     
+     */
+     
     //filled adjacency matrix, i.e. it creates a decomposable graph
     
     for(int c = (p-1); c >= 0 ; c--){
@@ -427,6 +428,7 @@ int main() {
         }
     }
     
+    /*
     printf("The adjacency matrix:-\n");
     
     for (int c = 0; c < p; c++)
@@ -444,15 +446,15 @@ int main() {
     
     cout << "Please enter break: "<< endl;
     cin >> break1;
-    
+    */
     //this is the cholesky calculation
     
-    L[p-1][p-1] = 1;
-    D[p-1][p-1] = 1/S[p-1][p-1];
+    L[(p-1)*p+(p-1)] = 1;
+    D[(p-1)*p+(p-1)] = 1/S[p-1][p-1];
     
     for (int i1 = 0; i1< (p-1); i1++){
         int i = i1;
-        cout << "Cholesky Calcluation at i = " << i << endl;
+       // cout << "Cholesky Calcluation at i = " << i << endl;
         double Sii = S[i][i];
         double temp;
         
@@ -464,36 +466,35 @@ int main() {
             }
         }
         
-        cout << "Non-zero entries in row " << (i+1) << "i is "<< counter << endl;
+        // cout << "Non-zero entries in row " << (i+1) << "i is "<< counter << endl;
         
         if(counter==0){
-            cout << "Counter 0"<< endl;
+         //   cout << "Counter 0"<< endl;
             double dii = pow(1/(Sii),0.5);
-            L[i][i] = 1;
-            D[i][i] = pow(dii,2);
+            L[i*p+i] = 1;
+            D[i*p+i] = pow(dii,2);
         }
         else{
-            cout << "Counter non-zero" <<endl;
+            //cout << "Counter non-zero" <<endl;
             double *Sdoti;
-            Sdoti = (double *)malloc(counter*sizeof(double));
-            //Sdoti=new double[counter];
+            Sdoti=new double[counter];
             double *Sgp;
-            Sgp = (double *)malloc(counter*counter*sizeof(double));
-            //Sgp=new double[counter*counter];
+            Sgp=new double[counter*counter];
             double *u;
-            u = (double *)malloc(counter*sizeof(double));
-            //u=new double[counter];
+            u=new double[counter];
             
             memset(u, 0, sizeof(double) * counter);
-            
+          
+            /*
             for(int c = 0; c < counter ; c++){
                 cout << c << ": " << u[c] << endl;
             }
+            */
             
             int count1 = 0;
-            cout << "count1 set to 0" <<endl;
+            //cout << "count1 set to 0" <<endl;
             for (int c = (i+1); c < p; c++){
-                cout << "c = " << c <<endl;
+              //  cout << "c = " << c <<endl;
                 if(fadjMat[i][c]>0){
                     Sdoti[count1] = S[i][c];
                     
@@ -517,8 +518,9 @@ int main() {
                 
             }
             
-            cout << "Printing Sgp" << endl;
+            // cout << "Printing Sgp" << endl;
             
+            /*
             for (int c = 0; c < counter; c++)
                 for (int d = 0; d < counter; d++){
                     cout  << (c+1) << "," << (d+1) << ":"<< Sgp[c*counter+d]  << endl;
@@ -536,24 +538,27 @@ int main() {
             cin >> break1;
             
             printf("Calculating & Printing inverse\n");
+            */
             
             inverse(Sgp,counter);
             
+            /*
             for (int c = 0; c < counter; c++)
                 for (int d = 0; d < counter; d++){
                     cout  << (c+1) << "," << (d+1) << ":"<< Sgp[c*counter+d]  << endl;
                 }
             
             printf("Calcuating and Printing matrix vec prod:-\n");
+            */
             
             matvecprod(Sgp,Sdoti,u,counter);
             
-            
+            /*
             printf("u is:-\n");
             for (int c = 0; c < counter; c++){
                 cout  << (c+1) << ":"<< u[c]  << endl;
-                
             }
+            */
             
             double tempprod = 0;
             
@@ -561,34 +566,31 @@ int main() {
                 tempprod = tempprod - u[c]*Sdoti[c];
             }
             
-            printf("Calcuating dii:-\n");
+            //printf("Calcuating dii:-\n");
             
             double dii;
             dii = sqrt(1/(Sii + tempprod));
             
+            /*
             cout << "Temp Product is: " << tempprod << endl;
             cout << "Sii: " << Sii << endl;
             cout << "dii: " << dii << endl;
+            */
             
-            
-            L[i][i] = 1;
+            L[i*p+i] = 1;
             int count3 = 0;
             for(int c = (i+1); c < p ; c++){
                 if(fadjMat[i][c]>0){
-                    L[i][c] = -u[count3];
-                    cout << "L" << i <<","<< c  << "," << count3 << ":" << u[count3] << endl;
+                    L[i*p+c] = -u[count3];
+                  //  cout << "L" << i <<","<< c  << "," << count3 << ":" << u[count3] << endl;
                     count3 += 1;
                 }
             }
-            D[i][i] = pow(dii,2);
-            cout << "D"<< i <<","<< i  << ":" << 	D[i][i] << endl;
-            
-            free(Sdoti);
-            free(Sgp);
-            free(u);
-            //delete Sdoti;
-            //delete Sgp;
-            //delete u;
+            D[i*p+i] = pow(dii,2);
+            // cout << "D"<< i <<","<< i  << ":" << 	D[i][i] << endl;
+            delete Sdoti;
+            delete Sgp;
+            delete u;	
         }
     }
     //end cholesky
@@ -600,18 +602,20 @@ int main() {
         if(medgeset[c][1]>1){
             double Lsum = 0;
             for(int k = 0; k < (medgeset[c][1]-1); k++){
-                Lsum += L[medgeset[c][0]][k]*L[medgeset[c][1]][k];
+                Lsum += L[medgeset[c][0]*p+k]*L[medgeset[c][1]*p+k];
             }
-            L[medgeset[c][0]][medgeset[c][1]] = -Lsum/L[medgeset[c][1]][medgeset[c][1]];
+            L[medgeset[c][0]*p+medgeset[c][1]] = -Lsum/L[medgeset[c][1]*p+medgeset[c][1]];
         }
         else{
-            L[medgeset[c][0]][medgeset[c][1]] = 0;
+            L[medgeset[c][0]*p+ medgeset[c][1]] = 0;
         }
     }
     
     // end algorothim 1
     
     
+    
+    /*
     printf("L is:-\n");
       
       for (int c = 0; c < p; c++)
@@ -658,16 +662,17 @@ int main() {
     
     printf("LDL^t is:-\n");
     
+    */
+    
+    /*
     for (int c = 0; c < p; c++)
         for (int d = 0; d < p; d++){
             cout  << (c+1) << "," << (d+1) << ":"<< vecprod[c*p+d]  << endl;
         }
-    
     // column-wise swaps back to original ordering
     
     
     // row-wise swaps back to original ordering
 
-    
-    return 0;
+    */
 }
