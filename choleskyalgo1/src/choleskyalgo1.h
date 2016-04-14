@@ -21,4 +21,6 @@ int getIndexOfSmallestElement(double arr[], int size);
 
 void choleskyalgo1 (int *nIn, int *pIn, double *data, double *SS, double *thresholdIn, double *L, double *D, double *LD);
 
+void choleskyalgo1adj (int *nIn, int *pIn, double *data, double *SS, int *adjMatIn, double *L, double *D, double *LD);
+
 #endif

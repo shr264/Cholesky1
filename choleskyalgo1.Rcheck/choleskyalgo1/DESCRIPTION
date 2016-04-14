@@ -7,7 +7,7 @@ Authors@R: person("First", "Last", email = "first.last@example.com", role = c("a
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
 LazyData: TRUE
-Packaged: 2016-02-11 14:04:49 UTC; syedrahman
+Packaged: 2016-02-19 16:02:18 UTC; syedrahman
 Author: First Last [aut, cre]
 Maintainer: First Last <first.last@example.com>
-Built: R 3.1.2; x86_64-apple-darwin13.4.0; 2016-02-11 14:04:54 UTC; unix
+Built: R 3.1.2; x86_64-apple-darwin13.4.0; 2016-02-19 16:02:21 UTC; unix

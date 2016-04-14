@@ -19,15 +19,15 @@ choleskyalgo1.c:70:19: warning: unused variable 'tr' [-Wunused-variable]
 choleskyalgo1.c:84:19: warning: unused variable 'tr' [-Wunused-variable]
     char no= 'N', tr= 'T';
                   ^
-choleskyalgo1.c:291:16: warning: unused variable 'temp' [-Wunused-variable]
+choleskyalgo1.c:315:16: warning: unused variable 'temp' [-Wunused-variable]
         double temp;
                ^
-choleskyalgo1.c:141:10: warning: unused variable 'invS' [-Wunused-variable]
-  double invS[p*p];
-         ^
-choleskyalgo1.c:142:10: warning: unused variable 'inverseS' [-Wunused-variable]
-  double inverseS[p][p];
-         ^
+choleskyalgo1.c:627:16: warning: unused variable 'temp' [-Wunused-variable]
+        double temp;
+               ^
+choleskyalgo1.c:468:12: warning: unused variable 'newS' [-Wunused-variable]
+    double newS[p][p];
+           ^
 9 warnings generated.
 clang -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o choleskyalgo1.so choleskyalgo1.o -L/Library/Frameworks/R.framework/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Resources/lib -lRblas -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
 installing to /Users/syedrahman/Documents/Spring2016/CholeskyPaper1/Cholesky1/choleskyalgo1.Rcheck/choleskyalgo1/libs
